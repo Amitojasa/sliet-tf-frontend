@@ -15,6 +15,8 @@ import Coordinator from './superAdmin/Coordinator'
 import AddDomain from './superAdmin/AddDomain'
 import Domains from './core/Domains'
 import Domain from './core/Domain'
+import fail from './user/fail'
+import success from './user/success'
 
 
 function Routes() {
@@ -23,9 +25,12 @@ function Routes() {
 
             <Switch>
                 <Route path="/" exact component={Home}></Route>
+                {/* <Route path="/payment" exact render={() => { window.location.href = "/pay/checkout.html" }}></Route> */}
                 <Route path="/signup" exact component={Signup}></Route>
                 <Route path="/signin" exact component={Signin}></Route>
                 <Route path="/signout" exact component={Signout}></Route>
+                <Route path="/getSuccess" exact component={success}></Route>
+                <Route path="/getFailure" exact component={fail}></Route>
                 <Route path="/domains" exact component={Domains}></Route>
                 <Route
                     path="/domain/:domainId"

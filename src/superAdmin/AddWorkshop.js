@@ -2,27 +2,29 @@ import React, { useState, useRef, useEffect } from 'react'
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base';
 import { getCoordinators } from './helper/coordinatorApiCalls';
-import { createDomain } from './helper/domainApiCalls';
+import { createWorkshop } from './helper/workshopApiCalls';
 
 
-const Domain = () => {
+const Workshop = () => {
     const ref = React.useRef();
 
 
 
     const { user, token } = isAuthenticated();
     const [values, setValues] = useState({
-        domainName: "",
-        domainDescription: "",
+        workshopName: "",
+        workshopDescription: "",
+        hostName: "",
+        hostDescription: "",
+
         studentCoordinator: [],
 
-        facultyCoordinator: [],
         photo: "",
 
         // photoField: "",
         loading: false,
         error: "",
-        createdDomain: "",
+        createdWorkshop: "",
         formData: new FormData()
 
     });
@@ -30,12 +32,13 @@ const Domain = () => {
 
     const [coordinators, setCoordinators] = useState([])
     const [studentCoordinatorVal, setStudentCoordinatorVal] = useState("")
-    const [facultyCoordinatorVal, setFacultyCoordinatorVal] = useState("")
+
     const {
-        domainName,
-        domainDescription,
+        workshopName,
+        workshopDescription,
         studentCoordinator,
-        facultyCoordinator, photo, loading, error, createdDomain, formData
+        hostName,
+        hostDescription, photo, loading, error, createdWorkshop, formData
     } = values;
 
 
@@ -50,16 +53,7 @@ const Domain = () => {
             setStudentCoordinatorVal(e.target.value)
             // setValues({ ...setValues, studentCoordinatorVal: e.target.value })
         }
-        else if (name === "facultyCoordinator") {
-            let a = [];
-            // facultyCoordinator.map(fc => {
-            //     a.push(fc)
-            // })
-            a.push(e.target.value)
-            value = a;
 
-            setFacultyCoordinatorVal(e.target.value)
-        }
 
 
         formData.set(name, value);
@@ -71,7 +65,7 @@ const Domain = () => {
 
         setValues({ ...values, error: "", loading: true });
 
-        createDomain(user._id, token, formData)
+        createWorkshop(user._id, token, formData)
             .then(data => {
                 console.log(data)
                 if (data.error) {
@@ -80,18 +74,18 @@ const Domain = () => {
                     ref.current.value = ""
                     setValues({
                         ...values,
-                        domainName: "",
-                        domainDescription: "",
+                        workshopName: "",
+                        workshopDescription: "",
                         studentCoordinator: [],
-                        facultyCoordinator: [],
+                        hostName: "",
+                        hostDescription: "",
                         photo: "",
                         formData: new FormData(),
-                        createdDomain: data.domain1.domainName,
+                        createdWorkshop: data.workshop1.workshopName,
                         loading: false,
                         error: ""
                     });
 
-                    setFacultyCoordinatorVal("");
                     setStudentCoordinatorVal("");
 
                 }
@@ -101,7 +95,7 @@ const Domain = () => {
         console.log(values)
     }
 
-    const domainForm = () => {
+    const workshopForm = () => {
         return (
             <form>
                 Upload Image:
@@ -114,12 +108,12 @@ const Domain = () => {
                     ref={ref}
                 />
 
-                Domain Name:
-                <input type="text" placeholder="Enter your name" name="domainName" value={domainName} onChange={handleInputs} />
+                Workshop Name:
+                <input type="text" placeholder="Enter your name" name="workshopName" value={workshopName} onChange={handleInputs} />
 
                 Description:
-                <textarea name="domainDescription" placeholder="Description" id="description" cols="30"
-                    rows="10" onChange={handleInputs}>{domainDescription}</textarea>
+                <textarea name="workshopDescription" placeholder="Description" id="description" cols="30"
+                    rows="10" onChange={handleInputs}>{workshopDescription}</textarea>
 
                 <label for="studentCoordinator">Student Coordinator - 1</label>
 
@@ -151,21 +145,13 @@ const Domain = () => {
                         })}
                 </select> */}
 
+                Host Name:
+                <input type="text" placeholder="Enter host name" name="hostName" value={hostName} onChange={handleInputs} />
 
-                <label for="facultyCoordinator">Faculty Coordinator </label>
+                Description:
+                <textarea name="hostDescription" placeholder="Description" id="description" cols="30"
+                    rows="10" onChange={handleInputs}>{hostDescription}</textarea>
 
-                <select name="facultyCoordinator" id="facultyCoordinator" value={facultyCoordinatorVal} onChange={handleInputs}>
-                    <option value="">Select a faculty coordinator</option>
-                    {coordinators &&
-                        coordinators.map((coordinator, index) => {
-                            if (coordinator.coordinatorType === "Faculty")
-                                return (
-                                    <option key={index} value={coordinator._id}>
-                                        {coordinator.coordinatorName}
-                                    </option>
-                                );
-                        })}
-                </select>
 
                 <input type="submit" name="submit" onClick={onSubmit} />
 
@@ -177,9 +163,9 @@ const Domain = () => {
     const successMessage = () => (
         <div
             className="alert alert-success mt-3"
-            style={{ display: createdDomain ? "" : "none" }}
+            style={{ display: createdWorkshop ? "" : "none" }}
         >
-            <h4>{createdDomain} created successfully</h4>
+            <h4>{createdWorkshop} created successfully</h4>
         </div>
     );
     const errorMessage = () => (
@@ -187,7 +173,7 @@ const Domain = () => {
             className="alert alert-danger mt-3"
             style={{ display: error ? "" : "none" }}
         >
-            <h4>Domain creation failed</h4>
+            <h4>Workshop creation failed</h4>
         </div>
     );
 
@@ -215,9 +201,9 @@ const Domain = () => {
         preload();
     }, []);
     return (
-        <Base title="domain creation page">
+        <Base title="workshop creation page">
 
-            {domainForm()}
+            {workshopForm()}
 
 
             {successMessage()}
@@ -229,4 +215,4 @@ const Domain = () => {
 
 
 
-export default Domain;
+export default Workshop;

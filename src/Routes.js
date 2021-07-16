@@ -13,10 +13,14 @@ import SuperAdminRoutes from './auth/helper/SuperAdminRoutes'
 import SuperAdminDashboard from './user/SuperAdminDashboard'
 import Coordinator from './superAdmin/Coordinator'
 import AddDomain from './superAdmin/AddDomain'
+import AddWorkshop from './superAdmin/AddWorkshop'
+import AddWorkshopSession from './superAdmin/AddWorkshopSession'
 import Domains from './core/Domains'
 import Domain from './core/Domain'
 import fail from './user/fail'
 import success from './user/success'
+import Workshops from './core/Workshops'
+import Workshop from './core/Workshop'
 
 
 function Routes() {
@@ -37,9 +41,17 @@ function Routes() {
                     exact
                     component={Domain}
                 />
+                <Route path="/workshops" exact component={Workshops}></Route>
+                <Route
+                    path="/workshop/:workshopId"
+                    exact
+                    component={Workshop}
+                />
                 <SuperAdminRoutes path="/superadmin/dashboard" exact component={SuperAdminDashboard} />
                 <SuperAdminRoutes path="/superadmin/coordinator" exact component={Coordinator} />
                 <SuperAdminRoutes path="/superadmin/adddomain" exact component={AddDomain} />
+                <SuperAdminRoutes path="/superadmin/addworkshop" exact component={AddWorkshop} />
+                <SuperAdminRoutes path="/superadmin/addworkshopsession" exact component={AddWorkshopSession} />
                 <AdminRoutes path="/admin/dashboard" exact component={AdminDashboard} />
                 <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
                 <PrivateRoute path="/user/dashboard/profile" exact component={Profile} />

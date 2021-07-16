@@ -1,29 +1,18 @@
 import { API } from "../../backend"
 
 
-export const createDomain = (userId, token, domain) => {
+export const createWorkshopSession = (userId, token, workshopSession) => {
 
-    // console.log(domain.studentCoordinator)
 
-    return fetch(`${API}/domain/create/${userId}`, {
+
+    return fetch(`${API}/workshopSession/create/${userId}`, {
         method: "POST",
         headers: {
             Accept: "application/json",
             // "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: domain
-    })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => console.log(err));
-};
-
-
-export const getdomains = () => {
-    return fetch(`${API}/domains`, {
-        method: "GET"
+        body: workshopSession
     })
         .then(response => {
             return response.json();
@@ -33,8 +22,10 @@ export const getdomains = () => {
 
 
 
-export const getDomain = (DomainId) => {
-    return fetch(`${API}/domain/${DomainId}`, {
+
+
+export const getWorkshopSession = (WorkshopSessionId) => {
+    return fetch(`${API}/workshopSession/${WorkshopSessionId}`, {
         method: "GET",
         headers: {
             Accept: "application/json",

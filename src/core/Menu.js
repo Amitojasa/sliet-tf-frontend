@@ -21,19 +21,23 @@ function Menu({ history }) {
                     </Fragment>)
                 }
 
-                {isAuthenticated() && isAuthenticated().user.role === 2 && (
-                    <li>
-                        <Link to="/superadmin/dashboard">Super Admin Dashboard</Link>
-                    </li>
 
-                )}
                 {isAuthenticated() && isAuthenticated().user.role === 2 && (
                     <>
+                        <li>
+                            <Link to="/superadmin/dashboard">Super Admin Dashboard</Link>
+                        </li>
                         <li>
                             <Link to="/superadmin/coordinator">Coordinator</Link>
                         </li>
                         <li>
                             <Link to="/superadmin/adddomain">Add Domain</Link>
+                        </li>
+                        <li>
+                            <Link to="/superadmin/addworkshop">Add Workshop</Link>
+                        </li>
+                        <li>
+                            <Link to="/superadmin/addworkshopsession">Add Workshop session</Link>
                         </li>
                     </>
 
@@ -44,13 +48,21 @@ function Menu({ history }) {
                     </li>
                 )}
                 {isAuthenticated() && isAuthenticated().user.role === 0 && (
-                    <li>
-                        <Link to="/user/dashboard">User Dashboard</Link>
-                    </li>
+                    <>
+                        <li>
+                            <Link to="/user/dashboard">User Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to="/user/dashboard/profile">User profile</Link>
+                        </li>
+                    </>
                 )}
 
                 <li>
-                    <Link to="/domains">Domains</Link>
+                    <Link to="/domains">Sponsors</Link>
+                </li>
+                <li>
+                    <Link to="/workshops">Workshops</Link>
                 </li>
 
 

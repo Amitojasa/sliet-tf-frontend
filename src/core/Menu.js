@@ -59,11 +59,12 @@ function Menu({ history }) {
                 )}
 
                 <li>
-                    <Link to="/domains">Sponsors</Link>
+                    <Link to="/domains">Domains</Link>
                 </li>
                 <li>
                     <Link to="/workshops">Workshops</Link>
                 </li>
+
 
 
                 {

@@ -119,7 +119,7 @@ const Domain = () => {
 
                 Description:
                 <textarea name="domainDescription" placeholder="Description" id="description" cols="30"
-                    rows="10" onChange={handleInputs}>{domainDescription}</textarea>
+                    rows="10" onChange={handleInputs} value={domainDescription} />
 
                 <label for="studentCoordinator">Student Coordinator - 1</label>
 
@@ -219,7 +219,7 @@ const Domain = () => {
 
             {domainForm()}
 
-
+            {JSON.stringify(values)}
             {successMessage()}
             {errorMessage()}
         </Base>

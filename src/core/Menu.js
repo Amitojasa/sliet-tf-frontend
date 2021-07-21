@@ -34,6 +34,9 @@ function Menu({ history }) {
                             <Link to="/superadmin/adddomain">Add Domain</Link>
                         </li>
                         <li>
+                            <Link to="/superadmin/addEvent">Add Event</Link>
+                        </li>
+                        <li>
                             <Link to="/superadmin/addworkshop">Add Workshop</Link>
                         </li>
                         <li>

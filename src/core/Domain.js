@@ -13,6 +13,7 @@ function Domain({ match }) {
             if (data.error) {
                 seterror(data.error);
             } else {
+                console.log(data)
                 setDomain(data);
             }
         });
@@ -33,7 +34,7 @@ function Domain({ match }) {
                 }
             </pre>
 
-            <img src={`${BASE_API}${domain?.photo}`} alt="" />
+            <img src={`${BASE_API}${domain?.domain?.photo}`} alt="" />
             {/* <ImageHelper product={domain} /> */}
             {/* .split('/').pop() */}
         </Base>

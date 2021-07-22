@@ -13,6 +13,7 @@ const Event = () => {
     const [coordinators, setCoordinators] = useState([])
     const [eventCoordinatorVal, setEventCoordinatorVal] = useState("")
     const [domains, setDomains] = useState([]);
+    const [prizes, setPrizes] = useState([0, 0, 0])
     const [values, setValues] = useState({
         eventName: "",
         photo: "",
@@ -65,19 +66,26 @@ const Event = () => {
 
         var value;
         if (name == "prize1") {
+            // console.log("sdahhfgh")
             let a = [...prize]
-            a[0] = value
+            a[0] = e.target.value
             value = a;
+            name = "prize"
+            setPrizes(a);
 
         } else if (name == "prize2") {
             let a = [...prize]
-            a[1] = value
+            a[1] = e.target.value
             value = a;
+            name = "prize"
+            setPrizes(a);
 
         } else if (name == "prize3") {
             let a = [...prize]
-            a[2] = value
+            a[2] = e.target.value
             value = a;
+            name = "prize"
+            setPrizes(a);
 
         } else if (name == "photo") {
             value = e.target.files[0];
@@ -131,7 +139,7 @@ const Event = () => {
                         error: ""
                     });
                     setEventCoordinatorVal("");
-
+                    setPrizes([0, 0, 0])
 
                 }
             })
@@ -172,16 +180,16 @@ const Event = () => {
                 <input type="text" placeholder="Enter meeting url" name="eventLink" value={eventLink} onChange={handleInputs} />
 
                 prize1:
-                <input type="number" name="prize1" value={prize[0]} onChange={handleInputs} />
+                <input type="number" name="prize1" value={prizes[0]} onChange={handleInputs} />
                 prize2:
-                <input type="number" name="prize2" value={prize[1]} onChange={handleInputs} />
+                <input type="number" name="prize2" value={prizes[1]} onChange={handleInputs} />
                 prize3
-                <input type="number" name="prize3" value={prize[2]} onChange={handleInputs} />
+                {/* <input type="number" name="prize3" value={prize[2]} onChange={handleInputs} /> */}
+                <input type="number" name="prize3" value={prizes[2]} onChange={handleInputs} />
 
+                <label for="domainRefId">Domains</label>
 
-                <label for="domainId">Domains</label>
-
-                <select name="domainId" id="domainId" value={domainRefId} onChange={handleInputs}>
+                <select name="domainRefId" id="domainRefId" value={domainRefId} onChange={handleInputs}>
                     <option value="">Select a domain</option>
                     {domains &&
                         domains.map((domain, index) => {

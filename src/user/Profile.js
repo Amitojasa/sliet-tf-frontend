@@ -29,6 +29,8 @@ const Profile = () => {
     const [telegramPhoneNumberCheck, setTelegramPhoneNumberCheck] = useState(false);
     const [whatsappPhoneNumberCheck, setWhatsappPhoneNumberCheck] = useState(false);
 
+    const [completeUser, setCompleteUser] = useState(null)
+
     const {
         name,
         lastName,
@@ -58,6 +60,7 @@ const Profile = () => {
                 setValues({ ...values, error: data.error });
                 console.log(values)
             } else {
+                setCompleteUser(data)
                 setValues({
                     ...values,
                     name: data.name,
@@ -200,6 +203,11 @@ const Profile = () => {
 
             }
 
+            <pre>
+                {
+                    JSON.stringify(completeUser, null, 2)
+                }
+            </pre>
 
         </Base>
     )

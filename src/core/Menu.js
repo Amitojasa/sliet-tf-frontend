@@ -47,6 +47,7 @@ function Menu({ history }) {
                         <Link to="/admin/dashboard">Admin Dashboard</Link>
                     </li>
                 )}
+
                 {isAuthenticated() && isAuthenticated().user.role === 0 && (
                     <>
                         <li>
@@ -57,6 +58,9 @@ function Menu({ history }) {
                         </li>
                     </>
                 )}
+
+
+
 
                 <li>
                     <Link to="/domains">Domains</Link>

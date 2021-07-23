@@ -8,7 +8,7 @@ function Domain({ match }) {
     const [domain, setDomain] = useState(null);
     const [error, seterror] = useState(false);
 
-    const loadDomain = () => {
+    const  loadDomain = () => {
         getDomain(match.params.domainId).then(data => {
             if (data.error) {
                 seterror(data.error);
@@ -26,7 +26,7 @@ function Domain({ match }) {
 
     return (
         <Base title="Domain">
-
+            
             <pre>
                 {
                     JSON.stringify(domain, null, 2)
@@ -41,3 +41,6 @@ function Domain({ match }) {
 }
 
 export default Domain
+
+
+ // REACT_APP_BACKEND=http://localhost:4000/api/

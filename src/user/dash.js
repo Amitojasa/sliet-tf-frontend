@@ -33,6 +33,7 @@ function Dash() {
   const [values, setValues] = useState({
     name: "",
     lastName: "",
+    userID : "",
     email: "",
     phone: "",
     dob: new Date(),
@@ -51,36 +52,23 @@ function Dash() {
   });
   const [telegramPhoneNumberCheck, setTelegramPhoneNumberCheck] = useState(false);
   const [whatsappPhoneNumberCheck, setWhatsappPhoneNumberCheck] = useState(false);
+  const [completeUser, setCompleteUser] = useState(null);
 
-  const {
-    name,
-    lastName,
-    email,
-    phone,
-    dob,
-    designation,
-    collegeName,
-    collegeAddress,
-    courseEnrolled,
-    branchOfStudy,
-    yearOfStudy,
-    whatsappPhoneNumber,
-    telegramPhoneNumber,
-    loading,
-    updated,
-    error,
-  } = values;
+  const [userId, setUserId] = useState()
   const preload = (userId, token) => {
     getUser(userId, token).then(data => {
 
       if (data.error) {
         setValues({ ...values, error: data.error });
-        console.log(values)
+  
       } else {
+        
+        setCompleteUser(data);
         setValues({
           ...values,
           name: data.name,
           lastName: data.lastName,
+          userID : data.userId,
           email: data.email,
           phone: data.phone,
           designation: data.designation,
@@ -97,8 +85,10 @@ function Dash() {
     });
   }
   
+  
   useEffect(() => {
     preload(user._id, token);
+    setUserId(user._id);
   } , [])
 
   return (
@@ -156,7 +146,7 @@ function Dash() {
             <div className="user-info">
               <b className="user-name">{`${values.name}  ${values.lastName}`}</b>
               <p>{values.collegeName}</p>
-              <p className="user-id">tf!#1760</p>
+              <p className="user-id">{values.userID }</p>
             </div>
           </div>
 
@@ -168,6 +158,7 @@ function Dash() {
                 Events Registered
               </div>
               <div className="event-card_events-list">
+              
                 <div className="event">
                   <span className="event-name">Event Name</span>
                   <span className="event-time">10/07</span>
@@ -311,8 +302,8 @@ function Dash() {
               <div className="profile-information_pic">
                 <div className="pi-photo-group">
                   <img src={ProfileImage} alt="profile-image" />
-                  <div className="pi-photo-group_name">{values.name}</div>
-                  <div className="pi-photo-group_tag">tf#1760</div>
+                  <div className="pi-photo-group_name">{`${values.name} ${values.lastName}`}</div>
+                  <div className="pi-photo-group_tag">{values.userID}</div>
                 </div>
               </div>
             </div>

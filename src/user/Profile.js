@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
 import { getUser, updateUser } from './helper/userapicalls';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
     const [values, setValues] = useState({
@@ -83,7 +84,6 @@ const Profile = () => {
     useEffect(() => {
         preload(user._id, token);
         setUserId(user._id);
-
 
     }, [])
     const successMessage = () => (
@@ -167,42 +167,125 @@ const Profile = () => {
     }
     const profileForm = () => {
         return (
+          <>
             <form>
-                <input type="text" placeholder="Name" value={name} onChange={handleChange("name")} />
-                <input type="text" placeholder="Last Name" value={lastName} onChange={handleChange("lastName")} />
-                <input type="email" placeholder="email" value={email} onChange={handleChange("email")} />
-                <input type="tel" placeholder="Phone no." value={phone} onChange={handleChange("phone")} />
-                <input type="tel" placeholder="whatsapp Phone no." value={whatsappPhoneNumber} onChange={handleChange("whatsappPhoneNumber")} />
-                <input type="checkbox" checked={phone === whatsappPhoneNumber} onClick={handleCheck("whatsappPhoneNumber")} /> same as phone
-                <input type="tel" placeholder="telegram Phone no." value={telegramPhoneNumber} onChange={handleChange("telegramPhoneNumber")} />
-                <input type="checkbox" checked={phone === telegramPhoneNumber} onClick={handleCheck("telegramPhoneNumber")} /> same as phone
-                <input type="text" placeholder="designation" value={designation} onChange={handleChange("designation")} />
-                <input type="date" placeholder="dob" value={dob.toString()} onChange={handleChange("dob")} />
-                <input type="text" placeholder="College Name" value={collegeName} onChange={handleChange("collegeName")} />
-                <input type="text" placeholder="College Address" value={collegeAddress} onChange={handleChange("collegeAddress")} />
-                <input type="text" placeholder="Course Enrolled" value={courseEnrolled} onChange={handleChange("courseEnrolled")} />
-                <input type="text" placeholder="branch Of Study" value={branchOfStudy} onChange={handleChange("branchOfStudy")} />
-                <input type="number" min="1" placeholder="Year Of Study" value={yearOfStudy} onChange={handleChange("yearOfStudy")} />
-                <input type="submit" value="update" onClick={onSubmit} />
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={handleChange("name")}
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={handleChange("lastName")}
+              />
+              <input
+                type="email"
+                placeholder="email"
+                value={email}
+                onChange={handleChange("email")}
+              />
+              <input
+                type="tel"
+                placeholder="Phone no."
+                value={phone}
+                onChange={handleChange("phone")}
+              />
+              <input
+                type="tel"
+                placeholder="whatsapp Phone no."
+                value={whatsappPhoneNumber}
+                onChange={handleChange("whatsappPhoneNumber")}
+              />
+              <input
+                type="checkbox"
+                checked={phone === whatsappPhoneNumber}
+                onClick={handleCheck("whatsappPhoneNumber")}
+              />{" "}
+              same as phone
+              <input
+                type="tel"
+                placeholder="telegram Phone no."
+                value={telegramPhoneNumber}
+                onChange={handleChange("telegramPhoneNumber")}
+              />
+              <input
+                type="checkbox"
+                checked={phone === telegramPhoneNumber}
+                onClick={handleCheck("telegramPhoneNumber")}
+              />{" "}
+              same as phone
+              <input
+                type="text"
+                placeholder="designation"
+                value={designation}
+                onChange={handleChange("designation")}
+              />
+              <input
+                type="date"
+                placeholder="dob"
+                value={dob.toString()}
+                onChange={handleChange("dob")}
+              />
+              <input
+                type="text"
+                placeholder="College Name"
+                value={collegeName}
+                onChange={handleChange("collegeName")}
+              />
+              <input
+                type="text"
+                placeholder="College Address"
+                value={collegeAddress}
+                onChange={handleChange("collegeAddress")}
+              />
+              <input
+                type="text"
+                placeholder="Course Enrolled"
+                value={courseEnrolled}
+                onChange={handleChange("courseEnrolled")}
+              />
+              <input
+                type="text"
+                placeholder="branch Of Study"
+                value={branchOfStudy}
+                onChange={handleChange("branchOfStudy")}
+              />
+              <input
+                type="number"
+                min="1"
+                placeholder="Year Of Study"
+                value={yearOfStudy}
+                onChange={handleChange("yearOfStudy")}
+              />
+              <input type="submit" value="update" onClick={onSubmit} />
+            </form>
+            <br />
+            <br />
+            <br />
 
-            </form>)
+            
+          </>
+        );
     }
 
 
-    return (
-        <Base title="Profile page">
-            This is profile page
-            {
-                profileForm()}
-            {
-                errorMessage()
-            }{successMessage()
+                                        return (
+                                        <Base title="Profile page">
+                                            This is profile page
+                                            {
+                                                profileForm()}
+                                            {
+                                                errorMessage()
+                                            }{successMessage()
 
-            }
+                                            }
 
 
-        </Base>
-    )
+                                        </Base>
+                                        )
 }
 
-export default Profile
+                                        export default Profile

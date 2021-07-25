@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
+import Dash from './dash';
 import { payitback, updateUser } from './helper/userapicalls';
+
 
 function UserDashboard() {
 
@@ -16,6 +18,7 @@ function UserDashboard() {
         const d = await payitback(user._id, token);
 
         setval(d);
+        
 
     };
 
@@ -64,16 +67,15 @@ function UserDashboard() {
         )
     }
     return (
-        <Base title="User Dashboard page">
-            This is User Dashboard
+        
+        <Dash />
+        /* {JSON.stringify(user)}
+        <br></br>
+        {hasPaidEntry.toString()}
+        {payForm()} */
+        /* <button onClick={payit}>pay</button> */
 
-            {JSON.stringify(user)}
-            <br></br>
-            {hasPaidEntry.toString()}
-            {payForm()}
-            {/* <button onClick={payit}>pay</button> */}
-
-        </Base >
+        
     )
 }
 

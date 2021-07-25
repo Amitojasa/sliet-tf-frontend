@@ -171,9 +171,9 @@ const Profile = () => {
     const profileForm = () => {
         return (
             <form>
-                <input type="text" placeholder="Name" value={name} onChange={handleChange("lastName")} />
+                <input type="text" placeholder="Name" value={name} onChange={handleChange("name")} />
                 <input type="text" placeholder="Last Name" value={lastName} onChange={handleChange("lastName")} />
-                <input type="email" placeholder="email" value={email} onChange={handleChange("lastName")} />
+                <input type="email" placeholder="email" value={email} onChange={handleChange("email")} />
                 <input type="tel" placeholder="Phone no." value={phone} onChange={handleChange("phone")} />
                 <input type="tel" placeholder="whatsapp Phone no." value={whatsappPhoneNumber} onChange={handleChange("whatsappPhoneNumber")} />
                 <input type="checkbox" checked={phone === whatsappPhoneNumber} onClick={handleCheck("whatsappPhoneNumber")} /> same as phone
@@ -203,11 +203,6 @@ const Profile = () => {
 
             }
 
-            <pre>
-                {
-                    JSON.stringify(completeUser, null, 2)
-                }
-            </pre>
 
         </Base>
     )

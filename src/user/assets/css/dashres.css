@@ -210,6 +210,9 @@ main {
   font-weight: 600;
 }
 
+
+
+
 /* ----------------- Events ----------------- */
 
 .events {
@@ -691,5 +694,6 @@ main {
    .main_left-bar_bg {
       display : none;
   }	
+  
 
 }

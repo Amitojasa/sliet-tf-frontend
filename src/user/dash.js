@@ -1,6 +1,6 @@
 import React , {useState , useEffect} from 'react';
-// import './assets/css/dash.css';
 import './assets/css/dashres.css';
+import ProfileInformation from './Profile';
 
 import { Link } from 'react-router-dom';
 import * as Scroll from "react-scroll";
@@ -26,6 +26,7 @@ import Youtube from './assets/Icons/youtubeicon.svg';
 import moment from 'moment';
 import { getUser } from './helper/userapicalls';
 import { isAuthenticated } from '../auth/helper';
+import { Check } from '@material-ui/icons';
 
 function Dash() {
   let ScrollLink = Scroll.Link;
@@ -45,18 +46,18 @@ function Dash() {
     telegramPhoneNumber: "",
     branchOfStudy: "",
     yearOfStudy: 0,
+    eventRegIn: [],
+    workshopsEnrolled : [] ,
     loading: false,
     updated: false,
     error: "",
 
   });
-  const [telegramPhoneNumberCheck, setTelegramPhoneNumberCheck] = useState(false);
-  const [whatsappPhoneNumberCheck, setWhatsappPhoneNumberCheck] = useState(false);
   const [completeUser, setCompleteUser] = useState(null);
 
-  const [userId, setUserId] = useState()
+
   const preload = (userId, token) => {
-    getUser(userId, token).then(data => {
+     getUser(userId, token).then(data => {
 
       if (data.error) {
         setValues({ ...values, error: data.error });
@@ -79,17 +80,22 @@ function Dash() {
           yearOfStudy: data.yearOfStudy,
           whatsappPhoneNumber: data.whatsappPhoneNumber,
           telegramPhoneNumber: data.telegramPhoneNumber,
-          dob: moment(data.dob).format('YYYY-MM-DD')
+          dob: moment(data.dob).format('YYYY-MM-DD'),
+          eventRegIn: data.eventRegIn,
+          workshopsEnrolled : data.workshopsEnrolled ,
         });
       }
     });
   }
   
-  
+ 
   useEffect(() => {
     preload(user._id, token);
-    setUserId(user._id);
+  
+    
   } , [])
+
+  
 
   return (
     <main>
@@ -151,38 +157,34 @@ function Dash() {
           </div>
 
           <div className="events">
+
             {/* <!-- Event Card --> */}
+
             <div className="event-card">
               <div className="event-card_title">
                 <img src={Event} alt="event-techFEST" />
                 Events Registered
               </div>
-              <div className="event-card_events-list">
+
+              {values.eventRegIn.length > 0 ?
+                <div className="event-card_events-list">
               
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
+                  {values.eventRegIn.map((row) => (
+                    <div className="event" key={row._id}>
+                      <span className="event-name">{row.eventName}</span>
+                      <span className="event-time">{`${moment(row.eventDate).format('DD-MM')}`}</span>
+                    </div>
+                  ))
+                  }
+                  
                 </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
+                :
+                <div className="event" style={{borderBottom : 'none'}}>
+                  <span className="event-name">Please register in Events to see detail </span>
+                  
                 </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-              </div>
-              {/* <div className="event-card_button">
-                <Link to="#">See Mor e
-              </div> */}
+              }
+              
             </div>
             {/* <!-- Workshop Card --> */}
             <div className="event-card">
@@ -190,125 +192,31 @@ function Dash() {
                 <img src={Solid} alt="event-techFEST" />
                 Workshops Registered
               </div>
-              <div className="event-card_events-list">
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
+              {values.workshopsEnrolled.length > 0 ?
+                <div className="event-card_events-list">
+                  {values.workshopsEnrolled.map((row) => (
+                    <div className="event">
+                      <span className="event-name">Event Name</span>
+                      <span className="event-time">10/07</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
+                :
+                <div className="event" style={{ borderBottom: 'none' }}>
+                  <span className="event-name">Please register in Workshops to see details</span>
+
                 </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-                <div className="event">
-                  <span className="event-name">Event Name</span>
-                  <span className="event-time">10/07</span>
-                </div>
-              </div>
-              {/* <!-- <div className="event-card_button">
-                                  <Link to="#">See Mor e
-                              </div> --> */}
+              }
+             
             </div>
           </div>
         </div>
 
         {/* <!-- PROFILE --> */}
+
+        <ProfileInformation />
         
-        <div className="profile" id="profile">
-          <div className="profile-information">
-            <div className="section-heading">
-              <div className="section-heading_text">
-                <h3 className="section-heading_heading">Profile Information</h3>
-                <p className="section-heading_information">
-                  Basic info, like your name ,Profession etc.
-                </p>
-              </div>
-              <img
-                src={Editbutton}
-                alt="edit-button"
-                className="section-heading_edit"
-              />
-            </div>
-            <div className="profile-information_card card">
-              <div className="profile-information_info">
-                <div className="pi_personal-info">
-                  <div className="pi_info-group">
-                    <div className="info-group_que">Profession</div>
-                    <div className="info-group_ans">{values.designation}</div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">
-                      Organisation/College Name
-                    </div>
-                    <div className="info-group_ans">{values.collegeName}</div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">
-                      Course Enrolled in
-                      {/* <span className="info-group_que_condition">
-                        (only applicable on college students)
-                      </span> */}
-                    </div>
-                    <div className="info-group_ans">
-                      {values.courseEnrolled}
-                    </div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">
-                      Year of Study
-                      {/* <span className="info-group_que_condition">
-                        (only applicable on college students)
-                      </span> */}
-                    </div>
-                    <div className="info-group_ans">{values.yearOfStudy}</div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">Date of Birth</div>
-                    <div className="info-group_ans">{values.dob.toString()}</div>
-                  </div>
-                </div>
-                <div className="pi-heading">
-                  Contact Information
-                  <hr />
-                </div>
-                <div className="pi-contact-information">
-                  <div className="pi_info-group">
-                    <div className="info-group_que">E-mail Address</div>
-                    <div className="info-group_ans">
-                      {values.email}
-                    </div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">Phone Number</div>
-                    <div className="info-group_ans">{values.phone}</div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">WhatsApp Number</div>
-                    <div className="info-group_ans">{values.whatsappPhoneNumber}</div>
-                  </div>
-                  <div className="pi_info-group">
-                    <div className="info-group_que">Telegram Number</div>
-                    <div className="info-group_ans">{values.telegramPhoneNumber}</div>
-                  </div>
-                </div>
-              </div>
-              <div className="profile-information_pic">
-                <div className="pi-photo-group">
-                  <img src={ProfileImage} alt="profile-image" />
-                  <div className="pi-photo-group_name">{`${values.name} ${values.lastName}`}</div>
-                  <div className="pi-photo-group_tag">{values.userID}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         {/* <!-- CERTIFICATION AND AWARDS --> */}
 
@@ -331,7 +239,15 @@ function Dash() {
                   <hr />
                 </div>
                 <div className="pi_personal-info">
+                  
                   <div className="certificate-download_group">
+                    <div className="pi_info-group">
+                      Please Register to get Certificates 
+                    </div>
+                    
+                  </div>
+                  
+                  {/* <div className="certificate-download_group">
                     <div className="pi_info-group">
                       <div className="info-group_que">Profession</div>
                       <div className="info-group_ans">Student</div>
@@ -339,23 +255,25 @@ function Dash() {
                     <Link to="#" className="certificate-download_group-button">
                       Download
                     </Link>
-                  </div>
-                  <div className="certificate-download_group">
-                    <div className="pi_info-group">
-                      <div className="info-group_que">Profession</div>
-                      <div className="info-group_ans">Student</div>
-                    </div>
-                    <Link to="#" className="certificate-download_group-button">
-                      Download
-                    </Link>
-                  </div>
+                  </div> */}
+      
                 </div>
                 <div className="pi-heading">
                   Workshop Certificates
                   <hr />
                 </div>
                 <div className="pi-contact-information">
+                 
+                  
                   <div className="certificate-download_group">
+                    <div className="pi_info-group">
+                      Please Register to get Certificates
+                    </div>
+
+                  </div>
+                  
+
+                  {/* <div className="certificate-download_group">
                     <div className="pi_info-group">
                       <div className="info-group_que">Profession</div>
                       <div className="info-group_ans">Student</div>
@@ -363,25 +281,10 @@ function Dash() {
                     <Link to="#" className="certificate-download_group-button">
                       Download
                     </Link>
-                  </div>
-                  <div className="certificate-download_group">
-                    <div className="pi_info-group">
-                      <div className="info-group_que">Profession</div>
-                      <div className="info-group_ans">Student</div>
-                    </div>
-                    <Link to="#" className="certificate-download_group-button">
-                      Download
-                    </Link>
-                  </div>
-                  <div className="certificate-download_group">
-                    <div className="pi_info-group">
-                      <div className="info-group_que">Profession</div>
-                      <div className="info-group_ans">Student</div>
-                    </div>
-                    <Link to="#" className="certificate-download_group-button">
-                      Download
-                    </Link>
-                  </div>
+                  </div> */}
+                  
+                  
+                  
                 </div>
               </div>
               <div className="profile-information_pic"></div>

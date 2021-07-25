@@ -13,6 +13,7 @@ import SuperAdminRoutes from './auth/helper/SuperAdminRoutes'
 import SuperAdminDashboard from './user/SuperAdminDashboard'
 import Coordinator from './superAdmin/Coordinator'
 import AddDomain from './superAdmin/AddDomain'
+import AddEvent from './superAdmin/AddEvent'
 import AddWorkshop from './superAdmin/AddWorkshop'
 import AddWorkshopSession from './superAdmin/AddWorkshopSession'
 import Domains from './core/Domains'
@@ -50,6 +51,7 @@ function Routes() {
                 <SuperAdminRoutes path="/superadmin/dashboard" exact component={SuperAdminDashboard} />
                 <SuperAdminRoutes path="/superadmin/coordinator" exact component={Coordinator} />
                 <SuperAdminRoutes path="/superadmin/adddomain" exact component={AddDomain} />
+                <SuperAdminRoutes path="/superadmin/addevent" exact component={AddEvent} />
                 <SuperAdminRoutes path="/superadmin/addworkshop" exact component={AddWorkshop} />
                 <SuperAdminRoutes path="/superadmin/addworkshopsession" exact component={AddWorkshopSession} />
                 <AdminRoutes path="/admin/dashboard" exact component={AdminDashboard} />

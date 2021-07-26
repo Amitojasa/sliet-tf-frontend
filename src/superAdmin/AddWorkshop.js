@@ -21,6 +21,9 @@ const Workshop = () => {
 
         photo: "",
 
+        startDate: "",
+        endDate: "",
+        whatsappGroupLink: "",
         // photoField: "",
         loading: false,
         error: "",
@@ -38,7 +41,9 @@ const Workshop = () => {
         workshopDescription,
         studentCoordinator,
         hostName,
-        hostDescription, photo, loading, error, createdWorkshop, formData
+        hostDescription, startDate,
+        endDate,
+        whatsappGroupLink, photo, loading, error, createdWorkshop, formData
     } = values;
 
 
@@ -80,6 +85,10 @@ const Workshop = () => {
                         hostName: "",
                         hostDescription: "",
                         photo: "",
+
+                        startDate: "",
+                        endDate: "",
+                        whatsappGroupLink: "",
                         formData: new FormData(),
                         createdWorkshop: data.workshop1.workshopName,
                         loading: false,
@@ -113,7 +122,7 @@ const Workshop = () => {
 
                 Description:
                 <textarea name="workshopDescription" placeholder="Description" id="description" cols="30"
-                    rows="10" onChange={handleInputs}>{workshopDescription}</textarea>
+                    rows="10" onChange={handleInputs} value={workshopDescription}></textarea>
 
                 <label for="studentCoordinator">Student Coordinator - 1</label>
 
@@ -150,8 +159,15 @@ const Workshop = () => {
 
                 Description:
                 <textarea name="hostDescription" placeholder="Description" id="description" cols="30"
-                    rows="10" onChange={handleInputs}>{hostDescription}</textarea>
+                    rows="10" onChange={handleInputs} value={hostDescription}></textarea>
 
+                start date:
+                <input type="datetime-local" name="startDate" value={startDate} onChange={handleInputs} />
+                end date:
+                <input type="datetime-local" name="endDate" value={endDate} onChange={handleInputs} />
+
+                whatsappGroupLink
+                <input type="text" name="whatsappGroupLink" value={whatsappGroupLink} onChange={handleInputs} />
 
                 <input type="submit" name="submit" onClick={onSubmit} />
 

@@ -27,6 +27,7 @@ function Workshop({ match }) {
 
 
     const registerWorkshop = () => {
+
         registerInWorkshop(user._id, token, match.params.workshopId).then(
             data => {
                 console.log(data)
